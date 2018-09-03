@@ -1,0 +1,15 @@
+[submodule "common"]
+	path = common
+	url = git@github.com:OSNZ/common.git
+[submodule "composite"]
+	path = composite
+	url = git@github.com:OSNZ/composite.git
+[submodule "archetype"]
+	path = archetype
+	url = git@github.com:OSNZ/archetype.git
+[submodule "tile"]
+	path = tile
+	url = git@github.com:OSNZ/tile.git
+[submodule "parent"]
+	path = parent
+	url = git@github.com:OSNZ/parent.git
