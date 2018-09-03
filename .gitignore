@@ -55,6 +55,5 @@ gradle-app.setting
 # Docker and Vagrant related
 */.vagrant/
 
-# Security related
-credentials.yml
-src/test/resources/testdb/
+# maven
+repository/
