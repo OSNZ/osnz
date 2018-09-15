@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -e
-
-cd "$(dirname "$0")"
-
-git submodule update --init --recursive && \
-git submodule foreach --recursive git checkout master && \
-find . -type d -depth 1 | xargs -P10 -I{} bash -c 'cd {} && git submodule update --init --recursive && git submodule foreach --recursive git checkout master'

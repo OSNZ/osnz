@@ -1,3 +1,0 @@
-#!/bin/bash
-
-scripts/projects $1 | scripts/group | sort | uniq
