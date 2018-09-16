@@ -1,0 +1,32 @@
+#!/bin/bash
+
+function indexof() {
+  echo "$1" "$2" | awk '{print index($1,$2)}'
+}
+
+set -e
+cd "$(dirname "$0")/.."
+
+gitBaseUrl="${1}"
+project="${2}"
+pos1="$(indexof $project ':')"
+pos2="$(indexof $project '/')"
+projectGroup="${project:0:$pos1-1}"
+projectGitUrl="${project:$pos1}"
+projectName="${project:$pos2}"
+
+test -z "${projectGroup}" && echo "Missing project group" && exit 77
+test -z "${projectGitUrl}" && echo "Missing project git url" && exit 77
+test -z "${projectName}" && echo "Missing project name" && exit 77
+
+if [[ ! -d "./${projectGroup}/" ]]; then
+  mkdir -p "${projectGroup}"
+fi
+
+if [[ ! -d "./${projectGroup}/${projectName}/.git" ]]; then
+  echo "Cloning project from ${gitBaseUrl}:${projectGitUrl}.git"
+  git clone "${gitBaseUrl}:${projectGitUrl}.git" "${projectGroup}/${projectName}"> /dev/null 2>&1|| echo "Could not checkout group repository"
+fi
+
+
+

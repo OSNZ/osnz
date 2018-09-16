@@ -1,0 +1,14 @@
+#!/bin/bash
+
+function indexof() {
+  echo "$1" "$2" | awk '{print index($1,$2)}'
+}
+
+project=$1
+pos1="$(indexof $project ':')"
+pos2="$(indexof $project '/')"
+projectGroup="${project:0:$pos1-1}"
+projectGitUrl="${project:$pos1}"
+projectName="${project:$pos2}"
+
+projectGroup="$projectGroup" projectGitUrl="$projectGitUrl" projectName="$projectName"
