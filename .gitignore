@@ -3,3 +3,9 @@ common/
 composite/
 parent/
 tile/
+
+
+.DS_Store
+.vscode/
+.idea/
+*.iml
