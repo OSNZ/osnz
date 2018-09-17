@@ -11,7 +11,7 @@ projectGroup="${project:0:$pos1-1}"
 projectGitUrl="${project:$pos1}"
 projectName="${project:$pos2}"
 
-set -e -x
+set -e
 cd "$(dirname "$0")/.."
 
 if [[ -z "${project}" ]]; then
