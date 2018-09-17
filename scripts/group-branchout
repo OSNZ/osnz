@@ -13,6 +13,7 @@ pos1="$(indexof $project ':')"
 pos2="$(indexof $project '/')"
 projectGroup="${project:0:$pos1-1}"
 projectGitUrl="${project:$pos1}"
+projectOrg="${project:$pos1:$pos2-$pos1-1}"
 projectName="${project:$pos2}"
 
 test -z "${projectGroup}" && echo "Missing project group" && exit 77
@@ -20,13 +21,10 @@ test -z "${projectGitUrl}" && echo "Missing project git url" && exit 77
 test -z "${projectName}" && echo "Missing project name" && exit 77
 
 if [[ ! -d "./${projectGroup}/" ]]; then
-  mkdir -p "${projectGroup}"
+  echo "Cloning parent project from ${gitBaseUrl}:${projectOrg}/${projectGroup}.git"
+  git clone --depth=1 "${gitBaseUrl}:${projectOrg}/{projectGroup}.git" > /dev/null 2>&1|| echo "Could not checkout group repository"
+  if [[ ! -d "./${projectGroup}/.git" ]]; then
+    echo "No parent group project found for: ${projectGroup}"
+    mkdir -p "${projectGroup}"
+  fi
 fi
-
-if [[ ! -d "./${projectGroup}/${projectName}/.git" ]]; then
-  echo "Cloning project from ${gitBaseUrl}:${projectGitUrl}.git"
-  git clone "${gitBaseUrl}:${projectGitUrl}.git" "${projectGroup}/${projectName}"> /dev/null 2>&1|| echo "Could not checkout group repository"
-fi
-
-
-

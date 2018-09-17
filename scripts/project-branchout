@@ -11,7 +11,7 @@ projectGroup="${project:0:$pos1-1}"
 projectGitUrl="${project:$pos1}"
 projectName="${project:$pos2}"
 
-set -e
+set -e -x
 cd "$(dirname "$0")/.."
 
 if [[ -z "${project}" ]]; then
@@ -34,11 +34,11 @@ if [[ -d "./${projectGroup}/${projectName}/.git" ]]; then
   git pull --rebase origin > /dev/null 2>&1 || (echo -e "Failed: \033[31m${projectGroup}/${projectName}\033[0m \033[70D\033[70C\033[1m $( git pull --rebase origin 2>&1| head -n1)\033[0m")
 else
   cd "${projectGroup}"
-  echo -e "Cloning Project: \033[92m${projectGroup}/${projectName}\033[0m"
-  if git clone "${gitBaseUrl}/${projectName}.git" > /dev/null 2>&1; then
+  echo -e "Cloning Project: \033[92m${gitBaseUrl}:${projectGitUrl}.git\033[0m"
+  if git clone "${gitBaseUrl}:${projectGitUrl}.git" > /dev/null 2>&1; then
     cd "${projectName}"
     logProjectAction "Cloned"
   else
-    echo "Cloning failed: \033[31m${projectGroup}/${projectName}\033[0m"
+    echo -e "Cloning failed: \033[31m${gitBaseUrl}:${projectGitUrl}.git\033[0m"
   fi
 fi
