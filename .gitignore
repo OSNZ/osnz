@@ -1,11 +1,11 @@
-archetype/
-common/
-composite/
-parent/
-tile/
+# Ignore everything
+*
 
-
-.DS_Store
-.vscode/
-.idea/
-*.iml
+# But those
+!scripts/
+!.branchout
+!.projects
+!.gitignore
+!branchout
+!pull
+!README.md
