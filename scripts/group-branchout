@@ -21,10 +21,10 @@ test -z "${projectGitUrl}" && echo "Missing project git url" && exit 77
 test -z "${projectName}" && echo "Missing project name" && exit 77
 
 if [[ ! -d "./${projectGroup}/" ]]; then
-  echo "Cloning parent project from ${gitBaseUrl}:${projectOrg}/${projectGroup}.git"
-  git clone --depth=1 "${gitBaseUrl}:${projectOrg}/{projectGroup}.git" > /dev/null 2>&1|| echo "Could not checkout group repository"
-  if [[ ! -d "./${projectGroup}/.git" ]]; then
-    echo "No parent group project found for: ${projectGroup}"
+  # echo "Cloning parent project from ${gitBaseUrl}:${projectOrg}/${projectGroup}.git"
+  # git clone --depth=1 "${gitBaseUrl}:${projectOrg}/{projectGroup}.git" > /dev/null 2>&1|| echo "Could not checkout group repository"
+  # if [[ ! -d "./${projectGroup}/.git" ]]; then
+  #   echo "No parent group project found for: ${projectGroup}"
     mkdir -p "${projectGroup}"
-  fi
+  # fi
 fi

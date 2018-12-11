@@ -36,3 +36,4 @@ parent:OpenSourceNZ/central-parent
 parent:OpenSourceNZ/java-parent
 parent:OpenSourceNZ/groovy-parent
 parent:OpenSourceNZ/maven-plugin-parent
+jenkins:OpenSourceNZ/jenkins-pipeline-lib
