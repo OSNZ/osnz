@@ -37,3 +37,4 @@ parent:OpenSourceNZ/java-parent
 parent:OpenSourceNZ/groovy-parent
 parent:OpenSourceNZ/maven-plugin-parent
 jenkins:OpenSourceNZ/jenkins-pipeline-lib
+other:kdeng/osnz-maven-dependency-collection
