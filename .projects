@@ -32,9 +32,12 @@ composite:OpenSourceNZ/composite-spring-boot-tomcat
 composite:OpenSourceNZ/composite-spring-boot-loader
 common:OpenSourceNZ/common-jackson
 common:OpenSourceNZ/common-thymeleaf
+common:OpenSourceNZ/common-ebean
+common:OSNZ/osnz-assembly
 parent:OpenSourceNZ/central-parent
 parent:OpenSourceNZ/java-parent
 parent:OpenSourceNZ/groovy-parent
 parent:OpenSourceNZ/maven-plugin-parent
 jenkins:OpenSourceNZ/jenkins-pipeline-lib
 other:kdeng/osnz-maven-dependency-collection
+
