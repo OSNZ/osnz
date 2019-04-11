@@ -30,6 +30,7 @@ composite:OpenSourceNZ/composite-spring-boot-devtools
 composite:OpenSourceNZ/composite-spring-boot-undertow
 composite:OpenSourceNZ/composite-spring-boot-tomcat
 composite:OpenSourceNZ/composite-spring-boot-loader
+composite:OpenSourceNZ/composite-osnz-pom
 common:OpenSourceNZ/common-jackson
 common:OpenSourceNZ/common-thymeleaf
 common:OpenSourceNZ/common-ebean
