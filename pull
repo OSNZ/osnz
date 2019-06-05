@@ -1,8 +1,0 @@
-#!/bin/bash
-gitBaseUrl="git@github.com"
-set -e
-
-cd "$(dirname "$0")"
-
-prefix="$1"
-scripts/projects "${prefix}" | xargs -P10 -I{} scripts/project-pull "${gitBaseUrl}" {}

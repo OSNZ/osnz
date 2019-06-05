@@ -3,9 +3,25 @@
 gitBaseUrl="git@github.com"
 
 set -e
-
 cd "$(dirname "$0")"
 
-prefix="$1"
-scripts/projects "${prefix}" | xargs -P10 -I{} scripts/group-branchout "${gitBaseUrl}" {}
-scripts/projects "${prefix}" | xargs -P10 -I{} scripts/project-branchout "${gitBaseUrl}" {}
+echo -e "Updating bootstrap ..."
+
+do_force_pull="no"
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --force|-F)
+      do_force_pull="yes"
+    ;;
+  esac
+  shift
+done
+
+if [[ "${do_force_pull}" == "yes" ]] || git pull origin $(git rev-parse --abbrev-ref HEAD) > /dev/null 2>&1; then
+  echo -e "\033[32mAll good to go. Start to pulling all projects\033[0m"
+  prefix="$1"
+  scripts/projects "${prefix}" | xargs -P10 -I{} scripts/group-branchout "${gitBaseUrl}" {}
+  scripts/projects "${prefix}" | xargs -P10 -I{} scripts/project-branchout "${gitBaseUrl}" {}
+else
+  echo -e "\033[31mFailed to update bootstrap. Please stash or commit your local changes.\n"
+fi

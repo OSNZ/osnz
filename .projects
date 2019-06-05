@@ -16,6 +16,7 @@ composite:OpenSourceNZ/composite-ebean
 composite:OpenSourceNZ/composite-groovy
 composite:OpenSourceNZ/composite-unit-test
 composite:OpenSourceNZ/composite-logging
+composite:OpenSourceNZ/composite-log4j2
 composite:OpenSourceNZ/composite-spring
 composite:OpenSourceNZ/composite-spring-aspects
 composite:OpenSourceNZ/composite-spring-mvc
