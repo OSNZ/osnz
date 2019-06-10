@@ -38,7 +38,7 @@ function logProjectAction() {
   else
     highlightedAction="\033[31;5;11m${1}\033[0m"
   fi
-  
+
   if test "master" = "${gitBranch}"; then
     echo -e "${highlightedAction} ${projectGroup}/${projectName} \033[70D\033[70C${gitBranch}"
   else
@@ -63,7 +63,6 @@ else
   cd "${projectGroup}"
   echo -e "Cloning Project: \033[92m${gitBaseUrl}:${projectGitUrl}.git\033[0m"
   if git clone "${gitBaseUrl}:${projectGitUrl}.git" > /dev/null 2>&1; then
-    echo -e "1"
     cd "${projectName}"
     logProjectAction "Cloned"
   else
