@@ -1,21 +1,22 @@
 #!/bin/bash
-
+set -e
 gitBaseUrl="git@github.com"
 
-set -e
 cd "$(dirname "$0")"
-
 echo -e "Updating bootstrap ..."
-
 do_force_pull="no"
-while [[ $# -gt 0 ]]; do
-  case $1 in
-    --force|-F)
-      do_force_pull="yes"
-    ;;
-  esac
-  shift
-done
+if [[ -d "./${projectGroup}/${projectName}/.git" ]]; then
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      --force|-F)
+        do_force_pull="yes"
+      ;;
+    esac
+    shift
+  done
+else
+  do_force_pull="yes"
+fi
 
 if [[ "${do_force_pull}" == "yes" ]] || git pull origin $(git rev-parse --abbrev-ref HEAD) > /dev/null 2>&1; then
   echo -e "\033[32mAll good to go. Start to pulling all projects\033[0m"

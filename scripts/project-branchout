@@ -29,8 +29,12 @@ if [[ -z "${project}" ]]; then
   exit 1
 fi
 
+if [[ -z "$projectGroup" ]]; then
+  projectGroup="."
+fi
+
 function logProjectAction() {
-  gitBranch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo -e 2>/dev/null)
+  gitBranch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
   if test "Pulling" = "$1"; then
     highlightedAction="\033[32;5;11m${1}\033[0m"
   elif test "Cloned" = "$1"; then
@@ -48,7 +52,7 @@ function logProjectAction() {
 
 if [[ -d "./${projectGroup}/${projectName}/.git" ]]; then
   cd "${projectGroup}/${projectName}"
-  gitBranch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo -e 2>/dev/null)
+  gitBranch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
   if test "master" = "${gitBranch}" || test "develop" = "${gitBranch}"; then
     logProjectAction "Pulling"
     gitStash=$(git stash)
