@@ -20,6 +20,8 @@ composite:OpenSourceNZ/composite-log4j2
 composite:OpenSourceNZ/composite-spring-reactor
 composite:OpenSourceNZ/composite-spock-test
 composite:OpenSourceNZ/composite-java11-support
+composite:OpenSourceNZ/composite-kotlin
+composite:OpenSourceNZ/composite-scala
 composite:OSNZ/composite-osnz-pom
 common:OpenSourceNZ/common-jackson
 common:OpenSourceNZ/common-thymeleaf
