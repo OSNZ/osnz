@@ -1,4 +1,6 @@
 #!/bin/bash
+DEFAULT_LIST="github bitbucket gitlab"
+
 function indexof() {
   echo "$1" "$2" | awk '{print index($1,$2)}'
 }
@@ -20,6 +22,10 @@ projectGroup="${project:0:$pos1-1}"
 projectGitUrl="${project:$pos1}"
 projectName="${project:$pos2}"
 
+if [[ " $DEFAULT_LIST " =~ .*\ $projectGroup\ .* ]]; then
+  projectGroup="."
+fi
+
 set -e
 
 cd "$(dirname "$0")/.."
@@ -36,9 +42,11 @@ fi
 function logProjectAction() {
   gitBranch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
   if test "Pulling" = "$1"; then
-    highlightedAction="\033[32;5;11m${1}\033[0m"
-  elif test "Cloned" = "$1"; then
     highlightedAction="\033[33;5;11m${1}\033[0m"
+  elif test "Cloned" = "$1"; then
+    highlightedAction="\033[32;5;11m${1}\033[0m"
+  elif test "Pulled" = "$1"; then
+    highlightedAction="\033[32;5;11m${1}\033[0m"
   else
     highlightedAction="\033[31;5;11m${1}\033[0m"
   fi
@@ -56,7 +64,11 @@ if [[ -d "./${projectGroup}/${projectName}/.git" ]]; then
   if test "master" = "${gitBranch}" || test "develop" = "${gitBranch}"; then
     logProjectAction "Pulling"
     gitStash=$(git stash)
-    git pull --rebase origin "${gitBranch}" > /dev/null 2>&1 || (echo -e "Failed: \033[31m${projectGroup}/${projectName}\033[0m \033[70D\033[70C\033[1m $( git pull --rebase origin ${gitBranch} 2>&1| head -n1)\033[0m")
+    if git pull --rebase origin "${gitBranch}" > /dev/null 2>&1; then
+      logProjectAction "Pulled"
+    else
+      echo -e "Failed: \033[31m${projectGroup}/${projectName}\033[0m \033[70D\033[70C\033[1m $( git pull --rebase origin ${gitBranch} 2>&1| head -n1)\033[0m"
+    fi
     if contains "${gitStash}" "Saved working directory"; then
       git stash apply > /dev/null
     fi
